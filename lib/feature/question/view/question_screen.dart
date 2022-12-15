@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:quiz_app/common/data_model/answer/answer.dart';
+import 'package:quiz_app/common/data_model/question/question.dart';
 import 'package:quiz_app/feature/question/vm/question_vm.dart';
 import 'package:quiz_app/feature/question/widgets/answer_field/answer_field.dart';
 import 'package:quiz_app/feature/question/widgets/question_field/question_field.dart';
 
 class QuestionScreen extends StatefulWidget {
-  const QuestionScreen({Key? key}) : super(key: key);
+  final List<Question> questions;
+
+  const QuestionScreen({
+    required this.questions,
+    Key? key,
+  }) : super(key: key);
 
   @override
   _QuestionScreenState createState() => _QuestionScreenState();
@@ -20,9 +26,8 @@ class _QuestionScreenState extends State<QuestionScreen> {
 
   @override
   void initState() {
-    _viewModel = QuestionVm();
+    _viewModel = QuestionVm(questionList: widget.questions);
 
-    _viewModel.loadInitialData();
     super.initState();
   }
 
